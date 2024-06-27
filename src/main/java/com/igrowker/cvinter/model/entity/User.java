@@ -1,9 +1,13 @@
-package com.igrowker.cvinter.models;
+package com.igrowker.cvinter.model.entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+@Document(collection = "users")
 public class User {
-
+    @Id
     private Long id;
     private String email;
     private String password;
