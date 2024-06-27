@@ -1,4 +1,4 @@
 package com.igrowker.cvinter.services;
 
-public interface UserService {
+public interface IUserService {
 }
