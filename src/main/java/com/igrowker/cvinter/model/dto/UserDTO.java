@@ -1,6 +1,6 @@
-package com.igrowker.cvinter.dto;
+package com.igrowker.cvinter.model.dto;
 
-import com.igrowker.cvinter.model.User;
+import com.igrowker.cvinter.model.entity.User;
 
 import java.time.LocalDateTime;
 

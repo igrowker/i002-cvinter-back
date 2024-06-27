@@ -1,4 +1,4 @@
-package com.igrowker.cvinter.model;
+package com.igrowker.cvinter.model.entity;
 
 import org.springframework.data.annotation.Id;
 
