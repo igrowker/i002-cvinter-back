@@ -1,4 +1,4 @@
-package com.igrowker.cvinter.services;
+package com.igrowker.cvinter.service;
 
 import org.springframework.stereotype.Service;
 
