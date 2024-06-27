@@ -1,9 +1,11 @@
-package com.igrowker.cvinter.models;
+package com.igrowker.cvinter.model;
+
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
 public class User {
-
+    @Id
     private Long id;
     private String email;
     private String password;
