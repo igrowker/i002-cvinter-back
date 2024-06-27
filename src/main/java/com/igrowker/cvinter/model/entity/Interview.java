@@ -2,10 +2,12 @@ package com.igrowker.cvinter.model.entity;
 
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Document(collection = "interviews")
 public class Interview {
     @Id
     private long id;
