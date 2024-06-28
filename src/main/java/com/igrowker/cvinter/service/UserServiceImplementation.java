@@ -15,14 +15,7 @@ public class UserServiceImplementation implements IUserService {
     private UserRepository userRepository;
 
     public UserDTO getUserByEmail(String email) {
-        System.err.println("LLEGA A ACA");
         User user = userRepository.findByEmail(email);
-
-        System.err.println(user);
-
-        List<User> users = userRepository.findAll();
-
-        System.err.println(users);
 
         if (user == null) {
             return null;
