@@ -19,9 +19,12 @@ public class UserController {
 
 
     @GetMapping("/me")
-    public ResponseEntity<?> getUser(@RequestBody GetUserDTO body) {
+    public ResponseEntity<?> getUser(@RequestParam String email) {
+        UserDTO user = userService.getUserByEmail(email);
 
-        UserDTO user = userService.getUserByEmail(body.getEmail());
+        if (user == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
