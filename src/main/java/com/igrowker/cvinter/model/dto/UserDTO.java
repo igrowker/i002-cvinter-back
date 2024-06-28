@@ -28,6 +28,18 @@ public class UserDTO {
         updatedAt = user.getUpdatedAt();
     }
 
+    public UserDTO(Long id, String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        FullName = fullName;
+        this.cvUrl = cvUrl;
+        this.twoFactorEnabled = twoFactorEnabled;
+        this.twoFactorSecret = twoFactorSecret;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Long getId() {
         return id;
     }

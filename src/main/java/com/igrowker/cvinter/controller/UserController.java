@@ -1,6 +1,9 @@
 package com.igrowker.cvinter.controller;
 
 
+import com.igrowker.cvinter.model.dto.GetUserDTO;
+import com.igrowker.cvinter.model.dto.UserDTO;
+import com.igrowker.cvinter.model.repository.UserRepository;
 import com.igrowker.cvinter.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +19,11 @@ public class UserController {
 
 
     @GetMapping("/me")
-    public ResponseEntity<?> getUser() {
-        return new ResponseEntity<>("User", HttpStatus.OK);
+    public ResponseEntity<?> getUser(@RequestBody GetUserDTO body) {
+
+        UserDTO user = userService.getUserByEmail(body.getEmail());
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/me")

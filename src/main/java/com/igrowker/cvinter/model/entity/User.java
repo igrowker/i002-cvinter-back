@@ -1,6 +1,8 @@
 package com.igrowker.cvinter.model.entity;
 
+import com.igrowker.cvinter.model.dto.UserDTO;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -9,9 +11,10 @@ import java.time.LocalDateTime;
 public class User {
     @Id
     private Long id;
+    @Indexed(unique = true)
     private String email;
     private String password;
-    private String FullName;
+    private String fullName;
     private String cvUrl;
     private boolean twoFactorEnabled;
     private String twoFactorSecret;
@@ -24,7 +27,7 @@ public class User {
     public User(String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.email = email;
         this.password = password;
-        FullName = fullName;
+        fullName = fullName;
         this.cvUrl = cvUrl;
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
@@ -57,11 +60,11 @@ public class User {
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        fullName = fullName;
     }
 
     public String getCvUrl() {
@@ -110,12 +113,16 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", FullName='" + FullName + '\'' +
+                ", FullName='" + fullName + '\'' +
                 ", cvUrl='" + cvUrl + '\'' +
                 ", twoFactorEnabled=" + twoFactorEnabled +
                 ", twoFactorSecret='" + twoFactorSecret + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    public UserDTO toDTO() {
+        return new UserDTO(id, email, password, fullName, cvUrl, twoFactorEnabled, twoFactorSecret, createdAt, updatedAt);
     }
 }
