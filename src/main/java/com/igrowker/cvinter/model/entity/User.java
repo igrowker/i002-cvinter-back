@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Document(collection = "users")
 public class User {
     @Id
-    private Long id;
+    private String id;
     @Indexed(unique = true)
     private String email;
     private String password;
@@ -35,11 +35,11 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -123,6 +123,20 @@ public class User {
     }
 
     public UserDTO toDTO() {
-        return new UserDTO(id, email, password, fullName, cvUrl, twoFactorEnabled, twoFactorSecret, createdAt, updatedAt);
+        UserDTO dto = new UserDTO();
+        dto.setId(id);
+        dto.setEmail(email);
+        dto.setPassword(password);
+        dto.setFullName(fullName);
+        dto.setCvUrl(cvUrl);
+        dto.setTwoFactorEnabled(twoFactorEnabled);
+        dto.setTwoFactorSecret(twoFactorSecret);
+        dto.setCreatedAt(createdAt);
+        dto.setUpdatedAt(updatedAt);
+
+
+
+
+        return dto;
     }
 }
