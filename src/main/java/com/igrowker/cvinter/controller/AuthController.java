@@ -17,8 +17,8 @@ public class AuthController {
     @Autowired
     private IUserService userService;
 
-    @Autowired
-    private SecretKey secretKey;
+//    @Autowired
+//    private SecretKey secretKey;
 
 
     @PostMapping("/login")

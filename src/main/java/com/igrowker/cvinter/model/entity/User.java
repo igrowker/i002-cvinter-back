@@ -1,6 +1,8 @@
 package com.igrowker.cvinter.model.entity;
 
+import com.igrowker.cvinter.model.dto.UserDTO;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -8,10 +10,11 @@ import java.time.LocalDateTime;
 @Document(collection = "users")
 public class User {
     @Id
-    private Long id;
+    private String id;
+    @Indexed(unique = true)
     private String email;
     private String password;
-    private String FullName;
+    private String fullName;
     private String cvUrl;
     private boolean twoFactorEnabled;
     private String twoFactorSecret;
@@ -24,7 +27,7 @@ public class User {
     public User(String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.email = email;
         this.password = password;
-        FullName = fullName;
+        fullName = fullName;
         this.cvUrl = cvUrl;
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
@@ -32,11 +35,11 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -57,11 +60,11 @@ public class User {
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        fullName = fullName;
     }
 
     public String getCvUrl() {
@@ -110,12 +113,30 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", FullName='" + FullName + '\'' +
+                ", FullName='" + fullName + '\'' +
                 ", cvUrl='" + cvUrl + '\'' +
                 ", twoFactorEnabled=" + twoFactorEnabled +
                 ", twoFactorSecret='" + twoFactorSecret + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    public UserDTO toDTO() {
+        UserDTO dto = new UserDTO();
+        dto.setId(id);
+        dto.setEmail(email);
+        dto.setPassword(password);
+        dto.setFullName(fullName);
+        dto.setCvUrl(cvUrl);
+        dto.setTwoFactorEnabled(twoFactorEnabled);
+        dto.setTwoFactorSecret(twoFactorSecret);
+        dto.setCreatedAt(createdAt);
+        dto.setUpdatedAt(updatedAt);
+
+
+
+
+        return dto;
     }
 }
