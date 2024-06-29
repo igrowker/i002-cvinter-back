@@ -44,9 +44,5 @@ public class UserController {
         return new ResponseEntity<>("User", HttpStatus.OK);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUsers (@RequestBody RegisterUserDTO registerUserDTO) {
-        return userService.registerUser(registerUserDTO);
-    }
 
 }

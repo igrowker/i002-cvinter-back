@@ -1,5 +1,6 @@
 package com.igrowker.cvinter.controller;
 
+import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserLoginDTO;
 import com.igrowker.cvinter.service.IUserService;
 import io.jsonwebtoken.Jwts;
@@ -52,6 +53,11 @@ public class AuthController {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
 
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUsers (@RequestBody RegisterUserDTO registerUserDTO) {
+        return userService.registerUser(registerUserDTO);
     }
 
 
