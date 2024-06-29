@@ -24,6 +24,12 @@ public class User {
     public User() {
     }
 
+    public User(String email, String password, String fullName) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+    }
+
     public User(String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.email = email;
         this.password = password;

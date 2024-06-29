@@ -2,6 +2,7 @@ package com.igrowker.cvinter.controller;
 
 
 import com.igrowker.cvinter.model.dto.GetUserDTO;
+import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserDTO;
 import com.igrowker.cvinter.model.repository.UserRepository;
 import com.igrowker.cvinter.service.IUserService;
@@ -41,6 +42,11 @@ public class UserController {
     @PostMapping("/upload-cv")
     public ResponseEntity<?> uploadCv() {
         return new ResponseEntity<>("User", HttpStatus.OK);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUsers (@RequestBody RegisterUserDTO registerUserDTO) {
+        return userService.registerUser(registerUserDTO);
     }
 
 }
