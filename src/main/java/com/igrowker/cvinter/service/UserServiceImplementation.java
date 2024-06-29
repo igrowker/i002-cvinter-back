@@ -31,17 +31,10 @@ public class UserServiceImplementation implements IUserService {
     @Override
     public ResponseEntity<String> registerUser(RegisterUserDTO registerUserDTO) {
 
-        if(registerUserDTO.getEmail().isBlank()){
-            return  new ResponseEntity<>("Email can't be blank", HttpStatus.FORBIDDEN);
-        }
-        if(registerUserDTO.getPassword().isBlank()){
-            return new ResponseEntity<>("Password can't be blank", HttpStatus.FORBIDDEN);
-        }
-        if(registerUserDTO.getFullName().isBlank()){
-            return  new ResponseEntity<>("Fullname can't be blank", HttpStatus.FORBIDDEN);
-        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(registerUserDTO.getPassword());
 
-        User user = new User(registerUserDTO.getEmail(),registerUserDTO.getPassword(),registerUserDTO.getFullName());
+        User user = new User(registerUserDTO.getEmail(),encodedPassword,registerUserDTO.getFullName());
 
         userRepository.save(user);
 
