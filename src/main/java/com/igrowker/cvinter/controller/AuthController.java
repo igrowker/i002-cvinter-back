@@ -58,26 +58,22 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUsers (@RequestBody RegisterUserDTO registerUserDTO) {
 
+        System.err.println(registerUserDTO.toString());
+
         if (registerUserDTO ==  null) {
             return new ResponseEntity<>("Data not sent", HttpStatus.BAD_REQUEST);
         }
-        if (registerUserDTO.getEmail().isBlank()) {
+        if (registerUserDTO.getEmail() == null || registerUserDTO.getEmail().isBlank()) {
             return new ResponseEntity<>("Email can't be blank", HttpStatus.BAD_REQUEST);
         }
-        if (registerUserDTO.getPassword().isBlank()) {
+        if (registerUserDTO.getPassword() == null || registerUserDTO.getPassword().isBlank()) {
             return new ResponseEntity<>("Password can't be blank", HttpStatus.BAD_REQUEST);
         }
-        if (registerUserDTO.getFullName().isBlank()) {
+        if (registerUserDTO.getFullName() == null || registerUserDTO.getFullName().isBlank()) {
             return new ResponseEntity<>("Fullname can't be blank", HttpStatus.BAD_REQUEST);
         }
 
         return userService.registerUser(registerUserDTO);
-    }
-
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register() {
-        return new ResponseEntity<>("Login", HttpStatus.OK);
     }
 
     @PostMapping("/2fa")

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,10 +32,27 @@ public class UserServiceImplementation implements IUserService {
     @Override
     public ResponseEntity<String> registerUser(RegisterUserDTO registerUserDTO) {
 
+        if (userRepository.findByEmail(registerUserDTO.getEmail()) != null) {
+            return new ResponseEntity<>("User already exists", HttpStatus.BAD_REQUEST);
+        }
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(registerUserDTO.getPassword());
 
-        User user = new User(registerUserDTO.getEmail(),encodedPassword,registerUserDTO.getFullName());
+        User user = new User();
+
+        user.setEmail(registerUserDTO.getEmail());
+        user.setPassword(encodedPassword);
+        user.setFullName(registerUserDTO.getFullName());
+        user.setTwoFactorEnabled(false);
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+        user.setCvUrl("");
+        user.setTwoFactorSecret("");
+        System.err.println("DTO");
+        System.err.println(registerUserDTO.toString());
+        System.err.println("User");
+        System.err.println(user.toString());
 
         userRepository.save(user);
 
@@ -55,10 +73,7 @@ public class UserServiceImplementation implements IUserService {
 
         return false;
     }
-
-
-
-
+    
     private boolean checkPassword (String password, String passwordDB){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return (passwordEncoder.matches(password, passwordDB));
