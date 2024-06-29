@@ -5,4 +5,5 @@ import com.igrowker.cvinter.model.entity.User;
 
 public interface IUserService {
     UserDTO getUserByEmail(String email);
+    boolean checkCredentials(String email, String password);
 }

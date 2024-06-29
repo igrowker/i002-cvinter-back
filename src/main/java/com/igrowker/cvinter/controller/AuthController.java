@@ -1,29 +1,57 @@
 package com.igrowker.cvinter.controller;
 
+import com.igrowker.cvinter.model.dto.UserLoginDTO;
 import com.igrowker.cvinter.service.IUserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.crypto.SecretKey;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private final int EXPIRATION_TIME_IN_HOURS = 24;
+
     @Autowired
     private IUserService userService;
 
-//    @Autowired
-//    private SecretKey secretKey;
+    @Autowired
+    private SecretKey secretKey;
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> login() {
-        return new ResponseEntity<>("Login", HttpStatus.OK);
+    public ResponseEntity<?> login(@RequestBody UserLoginDTO credentials) {
+
+        if (credentials == null)
+            return new ResponseEntity<>("Credentials not sent", HttpStatus.BAD_REQUEST);
+        else if (credentials.getEmail() == null || credentials.getPassword() == null)
+            return new ResponseEntity<>("Credentials not sent", HttpStatus.BAD_REQUEST);
+
+        if (userService.checkCredentials(credentials.getEmail(), credentials.getPassword())) {
+
+            String token = Jwts.builder()
+                    .setSubject(credentials.getEmail())
+                    .setIssuedAt(new Date())
+                    .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_IN_HOURS * 60 * 60 * 1000))
+                    .signWith(secretKey, SignatureAlgorithm.HS256)
+                    .compact();
+
+            return new ResponseEntity<>(token, HttpStatus.OK);
+
+        }
+        else {
+            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+        }
+
     }
 
 
