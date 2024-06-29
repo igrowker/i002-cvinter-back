@@ -57,6 +57,20 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUsers (@RequestBody RegisterUserDTO registerUserDTO) {
+
+        if (registerUserDTO ==  null) {
+            return new ResponseEntity<>("Data not sent", HttpStatus.BAD_REQUEST);
+        }
+        if (registerUserDTO.getEmail().isBlank()) {
+            return new ResponseEntity<>("Email can't be blank", HttpStatus.BAD_REQUEST);
+        }
+        if (registerUserDTO.getPassword().isBlank()) {
+            return new ResponseEntity<>("Password can't be blank", HttpStatus.BAD_REQUEST);
+        }
+        if (registerUserDTO.getFullName().isBlank()) {
+            return new ResponseEntity<>("Fullname can't be blank", HttpStatus.BAD_REQUEST);
+        }
+
         return userService.registerUser(registerUserDTO);
     }
 
