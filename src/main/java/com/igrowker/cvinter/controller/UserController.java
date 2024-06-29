@@ -8,6 +8,7 @@ import com.igrowker.cvinter.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,9 +23,12 @@ public class UserController {
     public ResponseEntity<?> getUser(@RequestParam String email) {
         UserDTO user = userService.getUserByEmail(email);
 
+
         if (user == null) {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.err.println(passwordEncoder.encode(user.getPassword()));
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

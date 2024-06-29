@@ -30,10 +30,10 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             String token = extractJwtFromRequest(request);
             //System.out.println(token);
             if (token != null && validateToken(token)){
-                String username = extractUsernameFromToken(token);
+                String email = extractEmailFromToken(token);
 
-                if (username != null){
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, null);
+                if (email != null){
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null, null);
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
@@ -82,11 +82,11 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         return expirationDate != null && !expirationDate.before(new Date());
     }
 
-    private String extractUsernameFromToken (String token){
+    private String extractEmailFromToken (String token){
         try {
             Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
-            String username = claims.getSubject();
-            return username;
+            String email = claims.getSubject();
+            return email;
         }catch (Exception e){
             return null;
         }
