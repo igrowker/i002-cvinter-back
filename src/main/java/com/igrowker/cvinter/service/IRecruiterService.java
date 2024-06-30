@@ -7,6 +7,7 @@ import java.util.List;
 public interface IRecruiterService {
 
  List<User> getRecruitedUsersByRecruiterId(String recruiterId);
+ User findAll();
 
 
     
