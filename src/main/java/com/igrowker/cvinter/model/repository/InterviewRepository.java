@@ -8,4 +8,6 @@ public interface InterviewRepository extends MongoRepository<Interview, long>{
     Interview findById(Long id);
 
     List<Interview> findAll();
+
+    List<Interview> findByReclutadorId(Long reclutadorId);
 }
