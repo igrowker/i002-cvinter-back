@@ -10,5 +10,7 @@ public interface InterviewService {
 
     List<Interview> findByReclutadorId(Long reclutadorId); 
 
+    List<Interview> getInterviewById(long interviewId)
+
   
 }
