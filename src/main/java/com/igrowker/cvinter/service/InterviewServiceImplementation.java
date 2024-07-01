@@ -26,6 +26,10 @@ public class InterviewServiceImplementation implements IInterviewService {
     public List<Interview> findByRecruiterId(Long RecruiterId) {
         return InterviewRepository.findByReclutadorId(RecruiterId); 
     }
+    @Override
+    public Interview getInterviewById(long interviewId) {
+        return interviewRepository.findById(interviewId); 
+    }
 
   
 }
