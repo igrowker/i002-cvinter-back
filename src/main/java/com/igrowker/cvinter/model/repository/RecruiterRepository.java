@@ -6,15 +6,16 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface RecruiterRepository extends MongoRepository<Recruiter, String> {
-  
+    
+    User findById(String userId);
+    User findUserWithInterviews(String userId);
+    List<User> findRecruitedUsersByRecruiterId(String recruiterId);
     List<User> findUsersByfullNameOrEmail(String fullName, String email,);
     List<User> findAll();
-    User findById(String userId);
-    List<User> findRecruitedUsersByRecruiterId(String recruiterId);
-    User findUserWithInterviews(String userId);
+
+    Recruiter findById(String recruiterId);
     List<Recruiter> findUsersByfullNameOrEmail(String fullName, String email,);
     List<Recruiter> findAll();
-    Recruiter findById(String recruiterId);
 }
 
 
