@@ -19,6 +19,9 @@ public class UserServiceImplementation implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public UserDTO getUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
@@ -53,6 +56,33 @@ public class UserServiceImplementation implements IUserService {
         userRepository.save(user);
 
         return new ResponseEntity<>("User created successfully",HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<String> updateUser(UserDTO userDTO) {
+
+        User user = userRepository.findByEmail(userDTO.getEmail());
+
+        if (user == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+
+        if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+            user.setPassword(encodedPassword);
+        }
+
+        user.setEmail(userDTO.getEmail());
+        user.setFullName(userDTO.getFullName());
+        user.setCvUrl(userDTO.getCvUrl());
+        user.setTwoFactorEnabled(userDTO.isTwoFactorEnabled());
+        user.setTwoFactorSecret(userDTO.getTwoFactorSecret());
+        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+
+        return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
     }
 
     @Override
