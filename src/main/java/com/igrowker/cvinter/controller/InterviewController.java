@@ -27,7 +27,12 @@ public class InterviewController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getInterviewById(@RequestParam Long id) {
-        return new ResponseEntity<>("Interview", HttpStatus.OK);
-    }
+        if (interview.isPresent()) {
+            return new ResponseEntity<>(interview.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
 
+}
 }
