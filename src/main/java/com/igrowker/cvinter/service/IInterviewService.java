@@ -6,9 +6,9 @@ public interface InterviewService {
 
     List<Interview> getAllInterviews(); 
 
-    List<Interview> findByUsuarioId(Long usuarioId);
+    List<Interview> findByUserId(Long userId);
 
-    List<Interview> findByReclutadorId(Long reclutadorId); 
+    List<Interview> findByRecruiterId(Long recruiterId); 
 
     List<Interview> getInterviewById(long interviewId)
 
