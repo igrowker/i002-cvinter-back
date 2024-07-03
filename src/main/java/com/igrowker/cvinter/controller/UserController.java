@@ -1,6 +1,7 @@
 package com.igrowker.cvinter.controller;
 
 
+import com.igrowker.cvinter.model.dto.CVDTO;
 import com.igrowker.cvinter.model.dto.GetUserDTO;
 import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserDTO;
@@ -46,8 +47,20 @@ public class UserController {
     }
 
     @PostMapping("/upload-cv")
-    public ResponseEntity<?> uploadCv() { //! IMPLEMENTAR
-        return new ResponseEntity<>("User", HttpStatus.OK);
+    public ResponseEntity<?> uploadCv(@RequestBody CVDTO cv) { //! IMPLEMENTAR
+
+        int response = userService.uploadCV(cv);
+
+        switch (response) {
+            case 1:
+                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+            case 2:
+                return new ResponseEntity<>("CV uploaded successfully", HttpStatus.CREATED);
+            case 3:
+                return new ResponseEntity<>("CV updated successfully", HttpStatus.OK);
+            default:
+                return new ResponseEntity<>("Error uploading CV", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

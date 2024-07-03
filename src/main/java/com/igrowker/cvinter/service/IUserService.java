@@ -1,5 +1,6 @@
 package com.igrowker.cvinter.service;
 
+import com.igrowker.cvinter.model.dto.CVDTO;
 import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserDTO;
 import com.igrowker.cvinter.model.entity.User;
@@ -10,4 +11,5 @@ public interface IUserService {
     ResponseEntity<String> registerUser(RegisterUserDTO registerUserDTO);
     ResponseEntity<String> updateUser (UserDTO userDTO);
     boolean checkCredentials(String email, String password);
+    int uploadCV(CVDTO cv);
 }

@@ -1,5 +1,6 @@
 package com.igrowker.cvinter.service;
 
+import com.igrowker.cvinter.model.dto.CVDTO;
 import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserDTO;
 import com.igrowker.cvinter.model.entity.User;
@@ -96,6 +97,16 @@ public class UserServiceImplementation implements IUserService {
         }
 
         return false;
+    }
+
+    @Override
+    public int uploadCV(CVDTO cv) {
+
+        int response = 0;
+
+
+
+        return response;
     }
 
     private boolean checkPassword (String password, String passwordDB){
