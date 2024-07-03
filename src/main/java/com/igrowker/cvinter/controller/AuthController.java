@@ -56,7 +56,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUsers (@RequestBody RegisterUserDTO registerUserDTO) {
+    public ResponseEntity<String> register (@RequestBody RegisterUserDTO registerUserDTO) {
 
         System.err.println(registerUserDTO.toString());
 
@@ -77,12 +77,12 @@ public class AuthController {
     }
 
     @PostMapping("/2fa")
-    public ResponseEntity<?> twoFactor() {
+    public ResponseEntity<?> twoFactor() { //! IMPLEMENTAR
         return new ResponseEntity<>("Login", HttpStatus.OK);
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword() {
+    public ResponseEntity<?> resetPassword() { //! IMPLEMENTAR
         return new ResponseEntity<>("Login", HttpStatus.OK);
     }
 
