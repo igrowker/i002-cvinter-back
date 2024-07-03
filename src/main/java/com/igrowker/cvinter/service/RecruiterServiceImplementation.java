@@ -2,7 +2,6 @@ package com.igrowker.cvinter.service;
 
 import com.igrowker.cvinter.model.dto.UserDTO;
 import com.igrowker.cvinter.model.repository.UserRepository;
-import com.igrowker.cvinter.service.exception.RecruiterNotFoundException;
 import com.igrowker.cvinter.model.entity.Recruiter;
 import com.igrowker.cvinter.model.entity.User;
 import com.igrowker.cvinter.model.repository.RecruiterRepository;

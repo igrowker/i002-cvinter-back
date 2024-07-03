@@ -10,6 +10,5 @@ public interface InterviewRepository extends MongoRepository<Interview, String>{
 
     Interview findById(Long interviewId);
 
-    List<Interview> findByRecruiterId(Long recruiterId);
 }
 
