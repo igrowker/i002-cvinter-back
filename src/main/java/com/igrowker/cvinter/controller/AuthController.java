@@ -56,7 +56,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUsers (@RequestBody RegisterUserDTO registerUserDTO) {
+    public ResponseEntity<String> register (@RequestBody RegisterUserDTO registerUserDTO) {
 
         if (registerUserDTO ==  null) {
             return new ResponseEntity<>("Data not sent", HttpStatus.BAD_REQUEST);
@@ -75,18 +75,13 @@ public class AuthController {
     }
 
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register() {
-        return new ResponseEntity<>("Login", HttpStatus.OK);
-    }
-
     @PostMapping("/2fa")
-    public ResponseEntity<?> twoFactor() {
+    public ResponseEntity<?> twoFactor() { //! IMPLEMENTAR
         return new ResponseEntity<>("Login", HttpStatus.OK);
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword() {
+    public ResponseEntity<?> resetPassword() { //! IMPLEMENTAR
         return new ResponseEntity<>("Login", HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package com.igrowker.cvinter.model.dto;
 
+import com.igrowker.cvinter.model.entity.Role;
 import com.igrowker.cvinter.model.entity.User;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class UserDTO {
     private String twoFactorSecret;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Role role;
 
     public UserDTO(User user) {
         id = user.getId();
@@ -28,7 +30,7 @@ public class UserDTO {
         updatedAt = user.getUpdatedAt();
     }
 
-    public UserDTO(String id, String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserDTO(String id, String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt, Role role) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -38,6 +40,7 @@ public class UserDTO {
         this.twoFactorSecret = twoFactorSecret;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.role = role;
     }
 
     public UserDTO() {
@@ -114,5 +117,29 @@ public class UserDTO {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", FullName='" + FullName + '\'' +
+                ", cvUrl='" + cvUrl + '\'' +
+                ", twoFactorEnabled=" + twoFactorEnabled +
+                ", twoFactorSecret='" + twoFactorSecret + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", role=" + role +
+                '}';
     }
 }

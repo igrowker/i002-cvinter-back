@@ -1,16 +1,12 @@
-package com.igrowker.cvinter.model.entity;
+package com.igrowker.cvinter.model.dto;
 
-
-import com.igrowker.cvinter.model.dto.InterviewDTO;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.igrowker.cvinter.model.entity.Question;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Document(collection = "interviews")
-public class Interview {
-    @Id
+public class InterviewDTO {
+
     private long id;
     private int userId;
     private String videoURL;
@@ -18,16 +14,16 @@ public class Interview {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Interview(int id, int userId, String videoURL, List<Question> questions, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public InterviewDTO() {
+    }
+
+    public InterviewDTO(long id, int userId, String videoURL, List<Question> questions, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.userId = userId;
         this.videoURL = videoURL;
         this.questions = questions;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
-
-    public Interview() {
     }
 
     public long getId() {
@@ -80,7 +76,7 @@ public class Interview {
 
     @Override
     public String toString() {
-        return "Interview{" +
+        return "InterviewDTO{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", videoURL='" + videoURL + '\'' +
@@ -88,16 +84,5 @@ public class Interview {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
-    }
-
-    public InterviewDTO toDTO() {
-        InterviewDTO interviewDTO = new InterviewDTO();
-        interviewDTO.setId(this.id);
-        interviewDTO.setUserId(this.userId);
-        interviewDTO.setVideoURL(this.videoURL);
-        interviewDTO.setQuestions(this.questions);
-        interviewDTO.setCreatedAt(this.createdAt);
-        interviewDTO.setUpdatedAt(this.updatedAt);
-        return interviewDTO;
     }
 }
