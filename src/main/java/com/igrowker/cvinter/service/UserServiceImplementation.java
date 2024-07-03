@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,14 +32,55 @@ public class UserServiceImplementation implements IUserService {
     @Override
     public ResponseEntity<String> registerUser(RegisterUserDTO registerUserDTO) {
 
+        if (userRepository.findByEmail(registerUserDTO.getEmail()) != null) {
+            return new ResponseEntity<>("User already exists", HttpStatus.BAD_REQUEST);
+        }
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(registerUserDTO.getPassword());
 
-        User user = new User(registerUserDTO.getEmail(),encodedPassword,registerUserDTO.getFullName());
+        User user = new User();
+
+        user.setEmail(registerUserDTO.getEmail());
+        user.setPassword(encodedPassword);
+        user.setFullName(registerUserDTO.getFullName());
+        user.setTwoFactorEnabled(false);
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+        user.setCvUrl("");
+        user.setTwoFactorSecret("");
 
         userRepository.save(user);
 
         return new ResponseEntity<>("User created successfully",HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<String> updateUser(UserDTO userDTO) {
+
+        User user = userRepository.findByEmail(userDTO.getEmail());
+
+        if (user == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+
+        if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+            user.setPassword(encodedPassword);
+        }
+
+        user.setEmail(userDTO.getEmail());
+        user.setFullName(userDTO.getFullName());
+        user.setCvUrl(userDTO.getCvUrl());
+        user.setTwoFactorEnabled(userDTO.isTwoFactorEnabled());
+        user.setTwoFactorSecret(userDTO.getTwoFactorSecret());
+        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+
+        return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
     }
 
     @Override
@@ -55,9 +97,6 @@ public class UserServiceImplementation implements IUserService {
 
         return false;
     }
-
-
-
 
     private boolean checkPassword (String password, String passwordDB){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

@@ -6,12 +6,12 @@ public class RegisterUserDTO {
 
     private String email;
     private String password;
-    private String FullName;
+    private String fullName;
 
     public RegisterUserDTO(User user) {
         email = user.getEmail();
         password = user.getPassword();
-        FullName = user.getFullName();
+        fullName = user.getFullName();
     }
 
     public String getEmail() {
@@ -23,6 +23,24 @@ public class RegisterUserDTO {
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
+    }
+
+    public RegisterUserDTO(String email, String password, String fullName) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+    }
+
+    public RegisterUserDTO() {
+    }
+
+    @Override
+    public String toString() {
+        return "RegisterUserDTO{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                '}';
     }
 }

@@ -72,7 +72,7 @@ public class User {
     }
 
     public void setFullName(String fullName) {
-        fullName = fullName;
+        this.fullName = fullName;
     }
 
     public String getCvUrl() {

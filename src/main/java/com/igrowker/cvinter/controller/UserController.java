@@ -39,6 +39,12 @@ public class UserController {
         return new ResponseEntity<>("User", HttpStatus.OK);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<String> updateMyProfile(@RequestBody UserDTO userDTO) {
+        ResponseEntity<String> response = userService.updateUser(userDTO);
+        return response;
+    }
+
     @PostMapping("/upload-cv")
     public ResponseEntity<?> uploadCv() { //! IMPLEMENTAR
         return new ResponseEntity<>("User", HttpStatus.OK);
