@@ -1,14 +1,11 @@
 
 package com.igrowker.cvinter.service;
 
-import cvinter.igrowker.model.entity.User;
+import com.igrowker.cvinter.model.dto.UserDTO;
+import com.igrowker.cvinter.model.entity.User;
 import java.util.List;
 
 public interface IRecruiterService {
 
- List<User> getRecruitedUsersByRecruiterId(String recruiterId);
- User findAll();
-
-
-    
+    public List<UserDTO> getCandidates();
 }
