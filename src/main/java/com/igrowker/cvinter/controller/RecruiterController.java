@@ -28,13 +28,13 @@ public class RecruiterController {
 
         if (candidates.isEmpty())
             return new ResponseEntity<>("No candidates found", HttpStatus.NOT_FOUND);
-        
+
         else
             return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
 
     @PostMapping("/schedule-call")
-    public ResponseEntity<?> scheduleCall() {
+    public ResponseEntity<?> scheduleCall() { //! IMPLEMENTAR
         return new ResponseEntity<>("Recruiter", HttpStatus.OK);
     }
 

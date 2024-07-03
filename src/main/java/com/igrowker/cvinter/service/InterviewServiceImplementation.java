@@ -1,5 +1,6 @@
 package com.igrowker.cvinter.service;
 
+import com.igrowker.cvinter.model.dto.InterviewDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,29 +8,39 @@ import org.springframework.stereotype.Service;
 import com.igrowker.cvinter.model.entity.Interview;
 import com.igrowker.cvinter.model.repository.InterviewRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class InterviewServiceImplementation implements IInterviewService {
    @Autowired
     private InterviewRepository interviewRepository;
 
     @Override
-    public List<Interview> getAllInterviews() {
-        return InterviewRepository.findAll();
+    public List<InterviewDTO> getAllInterviews() {
+
+        List<Interview> interviews = interviewRepository.findAll();
+        List<InterviewDTO> interviewDTOs = new ArrayList<>();
+
+        if (interviews.isEmpty())
+            return null;
+
+        for (Interview interview: interviews){
+            interviewDTOs.add(interview.toDTO());
+        }
+
+        return interviewDTOs;
     }
 
     @Override
-    public List<Interview> findByUserId(Long UserId) {
-        return InterviewRepository.findByUserId(UserId); o
+    public InterviewDTO getInterviewById(long interviewId) {
+
+        Interview interview = interviewRepository.findById(interviewId);
+
+        if (interview != null) return interview.toDTO();
+        else return null;
     }
 
-    @Override
-    public List<Interview> findByRecruiterId(Long RecruiterId) {
-        return InterviewRepository.findByRecruiterrId(RecruiterId); 
-    }
-    @Override
-    public Interview getInterviewById(long interviewId) {
-        return interviewRepository.findById(interviewId); 
-    }
 
-  
 }

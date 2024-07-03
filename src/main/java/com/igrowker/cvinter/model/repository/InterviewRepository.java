@@ -4,11 +4,11 @@ import com.igrowker.cvinter.model.entity.Interview;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface InterviewRepository extends MongoRepository<Interview, long>{
+import java.util.List;
+
+public interface InterviewRepository extends MongoRepository<Interview, String>{
 
     Interview findById(Long interviewId);
-
-    List<Interview> findAll();
 
     List<Interview> findByRecruiterId(Long recruiterId);
 }
