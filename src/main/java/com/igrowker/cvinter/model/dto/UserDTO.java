@@ -10,7 +10,7 @@ public class UserDTO {
     private String id;
     private String email;
     private String password;
-    private String FullName;
+    private String fullName;
     private String cvUrl;
     private boolean twoFactorEnabled;
     private String twoFactorSecret;
@@ -22,7 +22,7 @@ public class UserDTO {
         id = user.getId();
         email = user.getEmail();
         password = user.getPassword();
-        FullName = user.getFullName();
+        fullName = user.getFullName();
         cvUrl = user.getCvUrl();
         twoFactorEnabled = user.isTwoFactorEnabled();
         twoFactorSecret = user.getTwoFactorSecret();
@@ -34,7 +34,7 @@ public class UserDTO {
         this.id = id;
         this.email = email;
         this.password = password;
-        FullName = fullName;
+        this.fullName = fullName;
         this.cvUrl = cvUrl;
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
@@ -60,7 +60,7 @@ public class UserDTO {
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public String getCvUrl() {
@@ -96,7 +96,7 @@ public class UserDTO {
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        fullName = fullName;
     }
 
     public void setCvUrl(String cvUrl) {
@@ -133,7 +133,7 @@ public class UserDTO {
                 "id='" + id + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", FullName='" + FullName + '\'' +
+                ", FullName='" + fullName + '\'' +
                 ", cvUrl='" + cvUrl + '\'' +
                 ", twoFactorEnabled=" + twoFactorEnabled +
                 ", twoFactorSecret='" + twoFactorSecret + '\'' +

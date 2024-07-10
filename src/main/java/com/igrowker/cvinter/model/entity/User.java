@@ -34,7 +34,7 @@ public class User {
     public User(String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt, Role role) {
         this.email = email;
         this.password = password;
-        fullName = fullName;
+        this.fullName = fullName;
         this.cvUrl = cvUrl;
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
