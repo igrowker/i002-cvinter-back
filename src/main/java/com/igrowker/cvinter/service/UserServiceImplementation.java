@@ -1,8 +1,12 @@
 package com.igrowker.cvinter.service;
 
+import com.igrowker.cvinter.model.dto.CV.ExperienciaCV;
+import com.igrowker.cvinter.model.dto.CV.TechSkillCV;
+import com.igrowker.cvinter.model.dto.CV.UbicacionCV;
 import com.igrowker.cvinter.model.dto.CVDTO;
 import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserDTO;
+import com.igrowker.cvinter.model.entity.Role;
 import com.igrowker.cvinter.model.entity.User;
 import com.igrowker.cvinter.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -118,5 +123,93 @@ public class UserServiceImplementation implements IUserService {
     private boolean checkPassword (String password, String passwordDB){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return (passwordEncoder.matches(password, passwordDB));
+    }
+
+    @Override
+    public List<UserDTO> getUsersByTech(String tech) {
+
+        List<User> users = userRepository.findAll();
+        List<UserDTO> result = new ArrayList<>();
+
+        for (User user : users) {
+            List<TechSkillCV> techSkillCV = user.getCv().getTechSkills();
+            for (TechSkillCV techSkill : techSkillCV) {
+                if (techSkill.getSkill().equals(tech)) {
+                    if (!result.contains(user.toDTO()))
+                        result.add(user.toDTO());
+                }
+            }
+        }
+
+        if (result.isEmpty()) {
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public List<UserDTO> getUsersByLocation(String ubicacion) {
+
+        List<User> users = userRepository.findAll();
+        List<UserDTO> result = new ArrayList<>();
+
+        for (User user : users) {
+            List<UbicacionCV> ubicaciones = user.getCv().getUbicaciones();
+            for (UbicacionCV ubicacionUser : ubicaciones) {
+                if (ubicacionUser.getRed().equals(ubicacion)){
+                    if (!result.contains(user.toDTO()))
+                        result.add(user.toDTO());
+                }
+            }
+        }
+
+        if (result.isEmpty()) {
+            return null;
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<UserDTO> getUsersByTitle(String title) {
+
+        List<User> users = userRepository.findAll();
+        List<UserDTO> result = new ArrayList<>();
+
+        for (User user : users) {
+            List<ExperienciaCV> experiencias = user.getCv().getExperiencias();
+            for (ExperienciaCV experiencia : experiencias) {
+                if (experiencia.getProfesion().equals(title)){
+                    if (!result.contains(user.toDTO()))
+                        result.add(user.toDTO());
+                }
+            }
+        }
+
+        if (result.isEmpty()) {
+            return null;
+        }
+
+        return result;
+    }
+
+    @Override
+    public Role getUserRole(String email) {
+
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            return null;
+        }
+        if (user.getRole().toString().equals("ADMIN")) {
+            return Role.ADMIN;
+        }
+        if (user.getRole().toString().equals("RECRUITER")) {
+            return Role.RECRUITER;
+        }
+        if (user.getRole().toString().equals("CANDIDATE")) {
+            return Role.CANDIDATE;
+        }
+        return null;
     }
 }

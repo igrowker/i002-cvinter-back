@@ -5,17 +5,17 @@ public class ExperienciaCV {
     private String empresa;
     private String dateStart;
     private String dateEnd;
-    private String rol;
+    private String descripcion;
 
     public ExperienciaCV() {
     }
 
-    public ExperienciaCV(String profesion, String empresa, String dateStart, String dateEnd, String rol) {
+    public ExperienciaCV(String profesion, String empresa, String dateStart, String dateEnd, String descripcion) {
         this.profesion = profesion;
         this.empresa = empresa;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
-        this.rol = rol;
+        this.descripcion = descripcion;
     }
 
     public String getProfesion() {
@@ -36,6 +36,7 @@ public class ExperienciaCV {
 
     public String getDateStart() {
         return dateStart;
+
     }
 
     public void setDateStart(String dateStart) {
@@ -50,12 +51,12 @@ public class ExperienciaCV {
         this.dateEnd = dateEnd;
     }
 
-    public String getRol() {
-        return rol;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class ExperienciaCV {
                 ", empresa='" + empresa + '\'' +
                 ", dateStart='" + dateStart + '\'' +
                 ", dateEnd='" + dateEnd + '\'' +
-                ", rol='" + rol + '\'' +
+                ", descripcion='" + descripcion + '\'' +
                 '}';
     }
 }
