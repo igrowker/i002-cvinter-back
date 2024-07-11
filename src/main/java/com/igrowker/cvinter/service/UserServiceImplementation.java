@@ -48,7 +48,7 @@ public class UserServiceImplementation implements IUserService {
         user.setTwoFactorEnabled(false);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
-        user.setCvUrl("");
+        user.setCv(null);
         user.setTwoFactorSecret("");
 
         userRepository.save(user);
@@ -73,7 +73,7 @@ public class UserServiceImplementation implements IUserService {
 
         user.setEmail(userDTO.getEmail());
         user.setFullName(userDTO.getFullName());
-        user.setCvUrl(userDTO.getCvUrl());
+        user.setCv(userDTO.getCv().toEntity());
         user.setTwoFactorEnabled(userDTO.isTwoFactorEnabled());
         user.setTwoFactorSecret(userDTO.getTwoFactorSecret());
         user.setUpdatedAt(LocalDateTime.now());
