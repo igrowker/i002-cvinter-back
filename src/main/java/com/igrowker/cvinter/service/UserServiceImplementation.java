@@ -102,11 +102,17 @@ public class UserServiceImplementation implements IUserService {
     @Override
     public int uploadCV(CVDTO cv) {
 
-        int response = 0;
+        User user = userRepository.findById(cv.getUserId()).orElse(null);
 
+        if (user == null) {
+            return 1;
+        }
 
+        user.setCv(cv.toEntity());
 
-        return response;
+        userRepository.save(user);
+
+        return 0;
     }
 
     private boolean checkPassword (String password, String passwordDB){

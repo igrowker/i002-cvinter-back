@@ -58,8 +58,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register (@RequestBody RegisterUserDTO registerUserDTO) {
 
-        System.err.println(registerUserDTO.toString());
-
         if (registerUserDTO ==  null) {
             return new ResponseEntity<>("Data not sent", HttpStatus.BAD_REQUEST);
         }

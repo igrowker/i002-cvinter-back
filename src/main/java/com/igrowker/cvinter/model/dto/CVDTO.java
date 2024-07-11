@@ -1,6 +1,7 @@
 package com.igrowker.cvinter.model.dto;
 
 import com.igrowker.cvinter.model.dto.CV.*;
+import com.igrowker.cvinter.model.entity.CV;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,16 @@ public class CVDTO {
     }
 
     public CVDTO() {
+    }
+
+    public CVDTO(ArrayList<IdiomaCV> idiomas, ArrayList<TechSkillCV> techSkills, ArrayList<ExperienciaCV> experiencias, ArrayList<EducacionCV> educaciones, ArrayList<CertificadoCV> certificados, ArrayList<RedCV> redes, ArrayList<UbicacionCV> ubicaciones) {
+        this.idiomas = idiomas;
+        this.techSkills = techSkills;
+        this.experiencias = experiencias;
+        this.educaciones = educaciones;
+        this.certificados = certificados;
+        this.redes = redes;
+        this.ubicaciones = ubicaciones;
     }
 
     public String getUserId() {
@@ -105,5 +116,9 @@ public class CVDTO {
                 ", redes=" + redes +
                 ", ubicaciones=" + ubicaciones +
                 '}';
+    }
+
+    public CV toEntity() {
+        return new CV(idiomas, techSkills, experiencias, educaciones, certificados, redes, ubicaciones);
     }
 }

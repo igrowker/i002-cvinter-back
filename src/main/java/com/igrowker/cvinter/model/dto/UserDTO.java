@@ -11,7 +11,7 @@ public class UserDTO {
     private String email;
     private String password;
     private String fullName;
-    private String cvUrl;
+    private CVDTO cv;
     private boolean twoFactorEnabled;
     private String twoFactorSecret;
     private LocalDateTime createdAt;
@@ -23,19 +23,19 @@ public class UserDTO {
         email = user.getEmail();
         password = user.getPassword();
         fullName = user.getFullName();
-        cvUrl = user.getCvUrl();
+        cv = user.getCv().toCVDTO();
         twoFactorEnabled = user.isTwoFactorEnabled();
         twoFactorSecret = user.getTwoFactorSecret();
         createdAt = user.getCreatedAt();
         updatedAt = user.getUpdatedAt();
     }
 
-    public UserDTO(String id, String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt, Role role) {
+    public UserDTO(String id, String email, String password, String fullName, CVDTO cv, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt, Role role) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
-        this.cvUrl = cvUrl;
+        this.cv = cv;
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
         this.createdAt = createdAt;
@@ -63,8 +63,8 @@ public class UserDTO {
         return fullName;
     }
 
-    public String getCvUrl() {
-        return cvUrl;
+    public CVDTO getCv() {
+        return cv;
     }
 
     public boolean isTwoFactorEnabled() {
@@ -96,11 +96,11 @@ public class UserDTO {
     }
 
     public void setFullName(String fullName) {
-        fullName = fullName;
+        this.fullName = fullName;
     }
 
-    public void setCvUrl(String cvUrl) {
-        this.cvUrl = cvUrl;
+    public void setCv(CVDTO cvUrl) {
+        this.cv = cvUrl;
     }
 
     public void setTwoFactorEnabled(boolean twoFactorEnabled) {
@@ -134,7 +134,7 @@ public class UserDTO {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", FullName='" + fullName + '\'' +
-                ", cvUrl='" + cvUrl + '\'' +
+                ", cvUrl='" + cv + '\'' +
                 ", twoFactorEnabled=" + twoFactorEnabled +
                 ", twoFactorSecret='" + twoFactorSecret + '\'' +
                 ", createdAt=" + createdAt +

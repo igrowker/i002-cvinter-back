@@ -15,7 +15,7 @@ public class User {
     private String email;
     private String password;
     private String fullName;
-    private String cvUrl;
+    private CV cv;
     private boolean twoFactorEnabled;
     private String twoFactorSecret;
     private LocalDateTime createdAt;
@@ -31,11 +31,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public User(String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt, Role role) {
+    public User(String email, String password, String fullName, CV cv, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt, Role role) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
-        this.cvUrl = cvUrl;
+        this.cv = cv;
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
         this.createdAt = createdAt;
@@ -75,12 +75,12 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getCvUrl() {
-        return cvUrl;
+    public CV getCv() {
+        return cv;
     }
 
-    public void setCvUrl(String cvUrl) {
-        this.cvUrl = cvUrl;
+    public void setCv(CV cv) {
+        this.cv = cv;
     }
 
     public boolean isTwoFactorEnabled() {
@@ -122,7 +122,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", FullName='" + fullName + '\'' +
-                ", cvUrl='" + cvUrl + '\'' +
+                ", cvUrl='" + cv + '\'' +
                 ", twoFactorEnabled=" + twoFactorEnabled +
                 ", twoFactorSecret='" + twoFactorSecret + '\'' +
                 ", createdAt=" + createdAt +
@@ -141,18 +141,6 @@ public class User {
     }
 
     public UserDTO toDTO() {
-        UserDTO dto = new UserDTO();
-        dto.setId(id);
-        dto.setEmail(email);
-        dto.setPassword(password);
-        dto.setFullName(fullName);
-        dto.setCvUrl(cvUrl);
-        dto.setTwoFactorEnabled(twoFactorEnabled);
-        dto.setTwoFactorSecret(twoFactorSecret);
-        dto.setCreatedAt(createdAt);
-        dto.setUpdatedAt(updatedAt);
-        dto.setRole(role);
-
-        return dto;
+        return new UserDTO(this);
     }
 }
