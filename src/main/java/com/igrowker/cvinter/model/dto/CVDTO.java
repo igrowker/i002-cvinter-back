@@ -10,34 +10,37 @@ public class CVDTO {
     private String userId;
     private ArrayList<IdiomaCV> idiomas;
     private ArrayList<TechSkillCV> techSkills;
-    private ArrayList<ExperienciaCV> experiencias;
-    private ArrayList<EducacionCV> educaciones;
+    private ArrayList<ExperienciaCV> experiencia;
+    private ArrayList<EducacionCV> education;
     private ArrayList<CertificadoCV> certificados;
     private ArrayList<RedCV> redes;
-    private ArrayList<UbicacionCV> ubicaciones;
+    private ArrayList<PersonalInfoCV> personalInfo;
+    private ArrayList<String> softSkills;
 
-    public CVDTO(String userId, ArrayList<IdiomaCV> idiomas, ArrayList<TechSkillCV> techSkills, ArrayList<ExperienciaCV> experiencias, ArrayList<EducacionCV> educaciones, ArrayList<CertificadoCV> certificados, ArrayList<RedCV> redes, ArrayList<UbicacionCV> ubicaciones) {
+    public CVDTO(String userId, ArrayList<IdiomaCV> idiomas, ArrayList<TechSkillCV> techSkills, ArrayList<ExperienciaCV> experiencia, ArrayList<EducacionCV> education, ArrayList<CertificadoCV> certificados, ArrayList<RedCV> redes, ArrayList<PersonalInfoCV> personalInfo, ArrayList<String> softSkills) {
         this.userId = userId;
         this.idiomas = idiomas;
         this.techSkills = techSkills;
-        this.experiencias = experiencias;
-        this.educaciones = educaciones;
+        this.experiencia = experiencia;
+        this.education = education;
         this.certificados = certificados;
         this.redes = redes;
-        this.ubicaciones = ubicaciones;
+        this.personalInfo = personalInfo;
+        this.softSkills = softSkills;
     }
 
     public CVDTO() {
     }
 
-    public CVDTO(ArrayList<IdiomaCV> idiomas, ArrayList<TechSkillCV> techSkills, ArrayList<ExperienciaCV> experiencias, ArrayList<EducacionCV> educaciones, ArrayList<CertificadoCV> certificados, ArrayList<RedCV> redes, ArrayList<UbicacionCV> ubicaciones) {
+    public CVDTO(ArrayList<IdiomaCV> idiomas, ArrayList<TechSkillCV> techSkills, ArrayList<ExperienciaCV> experiencia, ArrayList<EducacionCV> education, ArrayList<CertificadoCV> certificados, ArrayList<RedCV> redes, ArrayList<PersonalInfoCV> personalInfo, ArrayList<String> softSkills) {
         this.idiomas = idiomas;
         this.techSkills = techSkills;
-        this.experiencias = experiencias;
-        this.educaciones = educaciones;
+        this.experiencia = experiencia;
+        this.education = education;
         this.certificados = certificados;
         this.redes = redes;
-        this.ubicaciones = ubicaciones;
+        this.personalInfo = personalInfo;
+        this.softSkills = softSkills;
     }
 
     public String getUserId() {
@@ -64,20 +67,20 @@ public class CVDTO {
         this.techSkills = techSkills;
     }
 
-    public ArrayList<ExperienciaCV> getExperiencias() {
-        return experiencias;
+    public ArrayList<ExperienciaCV> getExperiencia() {
+        return experiencia;
     }
 
-    public void setExperiencias(ArrayList<ExperienciaCV> experiencias) {
-        this.experiencias = experiencias;
+    public void setExperiencia(ArrayList<ExperienciaCV> experiencia) {
+        this.experiencia = experiencia;
     }
 
-    public ArrayList<EducacionCV> getEducaciones() {
-        return educaciones;
+    public ArrayList<EducacionCV> getEducation() {
+        return education;
     }
 
-    public void setEducaciones(ArrayList<EducacionCV> educaciones) {
-        this.educaciones = educaciones;
+    public void setEducation(ArrayList<EducacionCV> education) {
+        this.education = education;
     }
 
     public ArrayList<CertificadoCV> getCertificados() {
@@ -96,12 +99,20 @@ public class CVDTO {
         this.redes = redes;
     }
 
-    public ArrayList<UbicacionCV> getUbicaciones() {
-        return ubicaciones;
+    public ArrayList<PersonalInfoCV> getPersonalInfo() {
+        return personalInfo;
     }
 
-    public void setUbicaciones(ArrayList<UbicacionCV> ubicaciones) {
-        this.ubicaciones = ubicaciones;
+    public void setPersonalInfo(ArrayList<PersonalInfoCV> personalInfo) {
+        this.personalInfo = personalInfo;
+    }
+
+    public ArrayList<String> getSoftSkills() {
+        return softSkills;
+    }
+
+    public void setSoftSkills(ArrayList<String> softSkills) {
+        this.softSkills = softSkills;
     }
 
     @Override
@@ -110,15 +121,16 @@ public class CVDTO {
                 "userId='" + userId + '\'' +
                 ", idiomas=" + idiomas +
                 ", techSkills=" + techSkills +
-                ", experiencias=" + experiencias +
-                ", educaciones=" + educaciones +
+                ", experiencia=" + experiencia +
+                ", education=" + education +
                 ", certificados=" + certificados +
                 ", redes=" + redes +
-                ", ubicaciones=" + ubicaciones +
+                ", personalInfo=" + personalInfo +
+                ", softSkills=" + softSkills +
                 '}';
     }
 
     public CV toEntity() {
-        return new CV(idiomas, techSkills, experiencias, educaciones, certificados, redes, ubicaciones);
+        return new CV(idiomas, techSkills, experiencia, education, certificados, redes, personalInfo, softSkills);
     }
 }

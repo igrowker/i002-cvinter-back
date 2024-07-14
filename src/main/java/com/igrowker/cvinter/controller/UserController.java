@@ -112,7 +112,7 @@ public class UserController {
             return new ResponseEntity<>("You are not authorized to perform this action", HttpStatus.UNAUTHORIZED);
         }
 
-        List<UserDTO> users = new ArrayList<>();
+        List<UserDTO> users = userService.getUsersByTitle(title);
 
         if (users == null || users.isEmpty()) {
             return new ResponseEntity<>("No users found", HttpStatus.NOT_FOUND);

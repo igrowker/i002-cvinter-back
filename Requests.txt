@@ -1,0 +1,173 @@
+
+Autenticacion
+
+Login
+/api/auth/login (Post)
+
+Body:
+{
+    "email": "Email del usuario",
+    "password":"Password del usuario"
+}
+
+Response: JWT
+
+Register
+/api/auth/register (Post)
+
+Body:
+{
+    "email": "Email del usuario",
+    "password":"Password del usuario",
+    "fullname":"Fullname del usuario"
+}
+
+Response: "User created successfully"
+
+Recruiter
+
+GetCandidates
+/api/recruiters/candidates (Get)
+
+Body:
+{
+    "email": "Email del usuario"
+}
+
+Header: JWT
+
+Response: Array de:
+
+{
+    "id":"ID DEL CANDIDATO",
+    "email":"EMAIL DEL CANDIDATO",
+    "fullName":"FULLNAME DEL CANDIDATO",
+    "cv":{
+        "userId":"ID DEL CANDIDATO"
+        "idiomas":[{"languaje":"IDIOMA",
+                   "nivel":"NIVEL EN EL LENGUAJE"
+                   }],
+        "techSkills":[{"skill":"HABILIDAD",
+                       "nivel":"NIVEL EN LA HABILIDAD"
+                      }],
+        "experiencia":[{"profesion":"PROFESION DEL USUARIO"
+                        "empresa":"EMPRESA EN LA QUE TRABAJO"
+                        "dateStart":"FECHA DE INICIO DEL TRABAJO"
+                        "dateEnd":"FECHA DE FIN DEL TRABAJO"
+                        "descripcion":"DESCRIPCION DE LO HECHO"
+                        }],
+        "education":[{"institucion":"INSTITUCION DONDE ESTUDIO"
+                      "carrera":CARRERA REALIZADA
+                      "nivel":"NIVEL DE EDUCACION"
+                      "anoStart":"ANIO INICIO EDUCACION"
+                      "anoEnd":"ANIO FIN EDUCACION"
+                      }],
+        "certificados":[{"skill":"HABILIDAD",
+                        "entidadEmisora":"EMISOR DEL CERT",
+                        "ano":"ANIO DEL CERT"
+                        }],
+        "redes:[{"red":"REDSOCIAL",
+                "user":"USERNAME"
+                }],
+        "personalInfo":
+        "softSkills":["SKILL", "SKILL2", "SKILL3"]
+        }
+}
+
+USERS
+
+getUser
+/api/user/me (GET)
+
+Header: JWT
+
+param: email
+
+response: IDEM A GET CANDIDATOS, PERO UNO SOLO
+
+
+getUser
+/api/user/me (PUT)
+
+Header: JWT
+
+body:
+{
+    "fullName":"FULLNAME DEL CANDIDATO"
+}
+NO ESTOY SEGURO QUE MAS PODRIA CAMBIAR?
+
+response: "User updated successfully"
+
+uploadCV
+/api/user/upload-cv (PUT)
+
+{
+    "id":"ID DEL CANDIDATO",
+    "email":"EMAIL DEL CANDIDATO",
+    "fullName":"FULLNAME DEL CANDIDATO",
+    "cv":{
+        "userId":"ID DEL CANDIDATO"
+        "idiomas":[{"languaje":"IDIOMA",
+                   "nivel":"NIVEL EN EL LENGUAJE"
+                   }],
+        "techSkills":[{"skill":"HABILIDAD",
+                       "nivel":"NIVEL EN LA HABILIDAD"
+                      }],
+        "experiencia":[{"profesion":"PROFESION DEL USUARIO"
+                        "empresa":"EMPRESA EN LA QUE TRABAJO"
+                        "dateStart":"FECHA DE INICIO DEL TRABAJO"
+                        "dateEnd":"FECHA DE FIN DEL TRABAJO"
+                        "descripcion":"DESCRIPCION DE LO HECHO"
+                        }],
+        "education":[{"institucion":"INSTITUCION DONDE ESTUDIO"
+                      "carrera":CARRERA REALIZADA
+                      "nivel":"NIVEL DE EDUCACION"
+                      "anoStart":"ANIO INICIO EDUCACION"
+                      "anoEnd":"ANIO FIN EDUCACION"
+                      }],
+        "certificados":[{"skill":"HABILIDAD",
+                        "entidadEmisora":"EMISOR DEL CERT",
+                        "ano":"ANIO DEL CERT"
+                        }],
+        "redes:[{"red":"REDSOCIAL",
+                "user":"USERNAME"
+                }],
+        "personalInfo":
+        "softSkills":["SKILL", "SKILL2", "SKILL3"]
+        }
+}
+
+Response: VARIAS:   "User not found"
+                    "CV uploaded successfully"
+                    "CV updated successfully"
+                    "Error uploading CV"
+
+
+getUsersByTech
+/api/user/getUsersByTech (GET)
+
+Header: JWT
+
+Param: tech, email
+
+response: IDEM A GET CANDIDATES
+
+
+getUsersByTech
+/api/user/getUsersByLocation (GET)
+
+Header: JWT
+
+Param: tech, Location
+
+response: IDEM A GET CANDIDATES
+
+getUsersByTech
+/api/user/getUsersByTitle (GET)
+
+Header: JWT
+
+Param: tech, Title
+
+response: IDEM A GET CANDIDATES

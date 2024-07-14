@@ -1,8 +1,8 @@
 package com.igrowker.cvinter.service;
 
 import com.igrowker.cvinter.model.dto.CV.ExperienciaCV;
+import com.igrowker.cvinter.model.dto.CV.PersonalInfoCV;
 import com.igrowker.cvinter.model.dto.CV.TechSkillCV;
-import com.igrowker.cvinter.model.dto.CV.UbicacionCV;
 import com.igrowker.cvinter.model.dto.CVDTO;
 import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserDTO;
@@ -154,9 +154,9 @@ public class UserServiceImplementation implements IUserService {
         List<UserDTO> result = new ArrayList<>();
 
         for (User user : users) {
-            List<UbicacionCV> ubicaciones = user.getCv().getUbicaciones();
-            for (UbicacionCV ubicacionUser : ubicaciones) {
-                if (ubicacionUser.getRed().equals(ubicacion)){
+            List<PersonalInfoCV> ubicaciones = user.getCv().getUbicaciones();
+            for (PersonalInfoCV ubicacionUser : ubicaciones) {
+                if (ubicacionUser.getIcon().equals("address") && ubicacionUser.getDato().equals(ubicacion)) {
                     if (!result.contains(user.toDTO()))
                         result.add(user.toDTO());
                 }

@@ -15,12 +15,13 @@ public class CV {
     private ArrayList<EducacionCV> educaciones;
     private ArrayList<CertificadoCV> certificados;
     private ArrayList<RedCV> redes;
-    private ArrayList<UbicacionCV> ubicaciones;
+    private ArrayList<PersonalInfoCV> ubicaciones;
+    private ArrayList<String> softSkills;
 
     public CV() {
     }
 
-    public CV(ArrayList<IdiomaCV> idiomas, ArrayList<TechSkillCV> techSkills, ArrayList<ExperienciaCV> experiencias, ArrayList<EducacionCV> educaciones, ArrayList<CertificadoCV> certificados, ArrayList<RedCV> redes, ArrayList<UbicacionCV> ubicaciones) {
+    public CV(ArrayList<IdiomaCV> idiomas, ArrayList<TechSkillCV> techSkills, ArrayList<ExperienciaCV> experiencias, ArrayList<EducacionCV> educaciones, ArrayList<CertificadoCV> certificados, ArrayList<RedCV> redes, ArrayList<PersonalInfoCV> ubicaciones, ArrayList<String> softSkills) {
         this.idiomas = idiomas;
         this.techSkills = techSkills;
         this.experiencias = experiencias;
@@ -28,6 +29,7 @@ public class CV {
         this.certificados = certificados;
         this.redes = redes;
         this.ubicaciones = ubicaciones;
+        this.softSkills = softSkills;
     }
 
     public ArrayList<IdiomaCV> getIdiomas() {
@@ -78,15 +80,23 @@ public class CV {
         this.redes = redes;
     }
 
-    public ArrayList<UbicacionCV> getUbicaciones() {
+    public ArrayList<PersonalInfoCV> getUbicaciones() {
         return ubicaciones;
     }
 
-    public void setUbicaciones(ArrayList<UbicacionCV> ubicaciones) {
+    public void setUbicaciones(ArrayList<PersonalInfoCV> ubicaciones) {
         this.ubicaciones = ubicaciones;
     }
 
+    public ArrayList<String> getSoftSkills() {
+        return softSkills;
+    }
+
+    public void setSoftSkills(ArrayList<String> softSkills) {
+        this.softSkills = softSkills;
+    }
+
     public CVDTO toCVDTO() {
-        return new CVDTO(idiomas, techSkills, experiencias, educaciones, certificados, redes, ubicaciones);
+        return new CVDTO(idiomas, techSkills, experiencias, educaciones, certificados, redes, ubicaciones, softSkills);
     }
 }
