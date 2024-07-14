@@ -1,10 +1,9 @@
 package com.igrowker.cvinter.controller;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.igrowker.cvinter.service.ITwoFactorAuthService;
@@ -13,16 +12,11 @@ import com.igrowker.cvinter.security.TwoFactorAuthRequest;
 
 
 
-
+@RestController
 public class TwoFactorAuthController {
-    @RestController
-public class TwoFactorAuthenticationController {
 
-    private final ITwoFactorAuthService twoFactorAuthenticationService;
-
-    public TwoFactorAuthenticationController(ITwoFactorAuthService twoFactorAuthenticationService) {
-        this.twoFactorAuthenticationService = twoFactorAuthenticationService;
-    }
+    @Autowired
+    private ITwoFactorAuthService twoFactorAuthenticationService;
 
     @PostMapping("/api/auth/2fa")
     public ResponseEntity<Void> send2FACode(@RequestBody TwoFactorAuthRequest request) {
