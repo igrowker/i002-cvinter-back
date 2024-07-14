@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests((authz) ->
-                        authz.requestMatchers("/**").permitAll()
+                        authz.requestMatchers("/api/auth/**").permitAll()
                                 .anyRequest().authenticated())
                 .addFilterBefore(corsFilter, ChannelProcessingFilter.class)
                 .addFilterBefore(jwtAuth(), UsernamePasswordAuthenticationFilter.class)
@@ -50,7 +50,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
-        return (web -> web.ignoring().requestMatchers("v1/auths", "v1/auths/**", "v1/health"));
+        return (web -> web.ignoring().requestMatchers("/api/auth/**"));
     }
 
 }
