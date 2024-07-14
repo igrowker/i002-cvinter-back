@@ -142,4 +142,8 @@ public class UserDTO {
                 ", role=" + role +
                 '}';
     }
+
+    public GetUserDTO toGetUserDTO() {
+        return new GetUserDTO(id, email, fullName, role.toString(), updatedAt.toString(), createdAt.toString(), cv, twoFactorEnabled);
+    }
 }

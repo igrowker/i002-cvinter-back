@@ -2,7 +2,9 @@ package com.igrowker.cvinter.controller;
 
 
 import com.igrowker.cvinter.model.dto.UserDTO;
+import com.igrowker.cvinter.model.entity.Role;
 import com.igrowker.cvinter.service.IRecruiterService;
+import com.igrowker.cvinter.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +22,11 @@ public class RecruiterController {
     @Autowired
     private IRecruiterService recruiterService;
 
+    @Autowired
+    private IUserService userService;
 
     @GetMapping("/candidates")
     public ResponseEntity<?> getCandidates() {
-
         List<UserDTO> candidates = recruiterService.getCandidates();
 
         if (candidates.isEmpty())

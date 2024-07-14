@@ -27,25 +27,17 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<?> getUser(@RequestParam String email) {
-        UserDTO user = userService.getUserByEmail(email);
-
+        GetUserDTO user = userService.getUserByEmail(email);
 
         if (user == null) {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.err.println(passwordEncoder.encode(user.getPassword()));
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/me")
-    public ResponseEntity<?> updateUser() { //! IMPLEMENTAR
-        return new ResponseEntity<>("User", HttpStatus.OK);
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<String> updateMyProfile(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO)  {
         ResponseEntity<String> response = userService.updateUser(userDTO);
         return response;
     }
@@ -55,16 +47,10 @@ public class UserController {
 
         int response = userService.uploadCV(cv);
 
-        switch (response) {
-            case 1:
-                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-            case 2:
-                return new ResponseEntity<>("CV uploaded successfully", HttpStatus.CREATED);
-            case 3:
-                return new ResponseEntity<>("CV updated successfully", HttpStatus.OK);
-            default:
-                return new ResponseEntity<>("Error uploading CV", HttpStatus.INTERNAL_SERVER_ERROR);
+        if (response == 1) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/getUsersByTech")

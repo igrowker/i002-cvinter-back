@@ -4,6 +4,7 @@ import com.igrowker.cvinter.model.dto.CV.ExperienciaCV;
 import com.igrowker.cvinter.model.dto.CV.PersonalInfoCV;
 import com.igrowker.cvinter.model.dto.CV.TechSkillCV;
 import com.igrowker.cvinter.model.dto.CVDTO;
+import com.igrowker.cvinter.model.dto.GetUserDTO;
 import com.igrowker.cvinter.model.dto.RegisterUserDTO;
 import com.igrowker.cvinter.model.dto.UserDTO;
 import com.igrowker.cvinter.model.entity.Role;
@@ -26,13 +27,13 @@ public class UserServiceImplementation implements IUserService {
     private UserRepository userRepository;
 
     @Override
-    public UserDTO getUserByEmail(String email) {
+    public GetUserDTO getUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
 
         if (user == null) {
             return null;
         }
-        return user.toDTO();
+        return user.toDTO().toGetUserDTO();
     }
 
     @Override
@@ -76,11 +77,10 @@ public class UserServiceImplementation implements IUserService {
             user.setPassword(encodedPassword);
         }
 
-        user.setEmail(userDTO.getEmail());
-        user.setFullName(userDTO.getFullName());
-        user.setCv(userDTO.getCv().toEntity());
-        user.setTwoFactorEnabled(userDTO.isTwoFactorEnabled());
-        user.setTwoFactorSecret(userDTO.getTwoFactorSecret());
+        if (userDTO.getEmail() != null && !userDTO.getEmail().isEmpty()) user.setEmail(userDTO.getEmail());
+        if (userDTO.getFullName() != null && !userDTO.getFullName().isEmpty()) user.setFullName(userDTO.getFullName());
+        if (userDTO.getCv() != null) user.setCv(userDTO.getCv().toEntity());
+        if (userDTO.getTwoFactorSecret() != null && !userDTO.getTwoFactorSecret().isEmpty()) user.setTwoFactorSecret(userDTO.getTwoFactorSecret());
         user.setUpdatedAt(LocalDateTime.now());
 
         userRepository.save(user);
