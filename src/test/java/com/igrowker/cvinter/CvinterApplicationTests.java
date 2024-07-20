@@ -9,11 +9,11 @@ import org.springframework.context.ApplicationContext;
 @SpringBootTest
 class CvinterApplicationTests {
     @Autowired
-    private ApplicationContext context; // Inject the application context
+    private ApplicationContext context; 
 
     @Test
     void contextLoads() {
-        // Use the 'context' variable to access beans and properties
+        
         assertNotNull(context.getBean("RecruiterController"));
     }
 
