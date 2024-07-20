@@ -3,7 +3,8 @@ package com.igrowker.cvinter.service;
 
 public interface ITwoFactorAuthService {
 
-    void send2FACode(String userId);
+    void enableTwoFactorAuthentication(String userId, String secretKey);
 
-    boolean verify2FACode(String userId, String twoFactorCode);
+    boolean verifyTwoFactorAuthenticationCode(String userId, String code);
+    
 }
