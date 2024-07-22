@@ -14,12 +14,12 @@ public class EmailServiceImplement implements EmailService {
     private JavaMailSender emailSender;
 
     @Override
-    public void sendSimpleEmail(String email, String subject, String text) {
+    public void sendSimpleEmail(String  emailTo, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
+        message.setTo(emailTo);
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
-        logger.log(Level.INFO,"Email enviado a: {0}" , email);
+        logger.log(Level.INFO,"Email enviado a: {0}" , emailTo);
     }
 }
