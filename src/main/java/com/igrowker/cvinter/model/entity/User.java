@@ -20,6 +20,7 @@ public class User {
     private String twoFactorSecret;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Role role;
 
     public User() {
     }
@@ -30,7 +31,7 @@ public class User {
         this.fullName = fullName;
     }
 
-    public User(String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(String email, String password, String fullName, String cvUrl, boolean twoFactorEnabled, String twoFactorSecret, LocalDateTime createdAt, LocalDateTime updatedAt, Role role) {
         this.email = email;
         this.password = password;
         fullName = fullName;
@@ -39,6 +40,7 @@ public class User {
         this.twoFactorSecret = twoFactorSecret;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.role = role;
     }
 
     public String getId() {
@@ -125,7 +127,17 @@ public class User {
                 ", twoFactorSecret='" + twoFactorSecret + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", role=" + role +
                 '}';
+    }
+
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public UserDTO toDTO() {
@@ -139,9 +151,7 @@ public class User {
         dto.setTwoFactorSecret(twoFactorSecret);
         dto.setCreatedAt(createdAt);
         dto.setUpdatedAt(updatedAt);
-
-
-
+        dto.setRole(role);
 
         return dto;
     }

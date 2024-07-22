@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PutMapping("/me")
-    public ResponseEntity<?> updateUser() {
+    public ResponseEntity<?> updateUser() { //! IMPLEMENTAR
         return new ResponseEntity<>("User", HttpStatus.OK);
     }
 
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/upload-cv")
-    public ResponseEntity<?> uploadCv() {
+    public ResponseEntity<?> uploadCv() { //! IMPLEMENTAR
         return new ResponseEntity<>("User", HttpStatus.OK);
     }
 

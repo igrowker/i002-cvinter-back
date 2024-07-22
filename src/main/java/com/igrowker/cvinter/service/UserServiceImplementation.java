@@ -19,9 +19,6 @@ public class UserServiceImplementation implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
     @Override
     public UserDTO getUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
@@ -68,6 +65,7 @@ public class UserServiceImplementation implements IUserService {
         }
 
         if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
             user.setPassword(encodedPassword);
         }
